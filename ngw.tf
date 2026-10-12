@@ -1,0 +1,46 @@
+resource "aws_nat_gateway" "eks_ngw_1a" {
+  allocation_id = aws_eip.eks_ngw_eip_1a.id
+  subnet_id     = aws_subnet.eks_subnet_public_1a.id
+
+  tags = merge(
+    local.tags,
+    {
+      Name = "${var.project_name}_ngw_1a",
+    }
+  )
+  depends_on = [aws_eip.eks_ngw_eip_1a]
+}
+
+resource "aws_nat_gateway" "eks_ngw_1b" {
+  allocation_id = aws_eip.eks_ngw_eip_1b.id
+  subnet_id     = aws_subnet.eks_subnet_public_1b.id
+
+  tags = merge(
+    local.tags,
+    {
+      Name = "${var.project_name}_ngw_1b",
+    }
+  )
+
+  depends_on = [aws_eip.eks_ngw_eip_1b]
+}
+
+resource "aws_eip" "eks_ngw_eip_1a" {
+  domain = "vpc"
+  tags = merge(
+    local.tags,
+    {
+      Name = "${var.project_name}_eip_1a",
+    }
+  )
+}
+
+resource "aws_eip" "eks_ngw_eip_1b" {
+  domain = "vpc"
+  tags = merge(
+    local.tags,
+    {
+      Name = "${var.project_name}_eip_1b",
+    }
+  )
+}
