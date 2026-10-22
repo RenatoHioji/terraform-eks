@@ -6,7 +6,9 @@ module "eks_network" {
 }
 
 module "eks_cluster" {
-  source       = "./modules/cluster"
-  project_name = var.project_name
-  tags         = local.tags
+  source           = "./modules/cluster"
+  project_name     = var.project_name
+  tags             = local.tags
+  public-subnet-1a = module.eks_network.subnet_public_1a
+  public-subnet-1b = module.eks_network.subnet_public_1b
 }
