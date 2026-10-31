@@ -12,3 +12,9 @@ variable "oidc" {
   type        = string
   description = "oidc"
 }
+
+variable "cluster_name" {
+  type        = string
+  description = "Name of the EKS cluster"
+
+}
