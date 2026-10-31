@@ -28,4 +28,6 @@ module "eks_load_balancer_controller" {
   tags         = local.tags
   oidc         = module.eks_cluster.oidc
   cluster_name = module.eks_cluster.cluster_name
+  vpc_id       = module.eks_network.vpc_id
+  region       = module.eks_network.region
 }

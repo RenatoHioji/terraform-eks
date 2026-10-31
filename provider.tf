@@ -26,7 +26,7 @@ provider "aws" {
 
 provider "kubernetes" {
   host                   = module.eks_cluster.cluster_endpoint
-  cluster_ca_certificate = base64encode(module.eks_cluster.certificate)
+  cluster_ca_certificate = base64decode(module.eks_cluster.certificate)
 
   exec {
     api_version = "client.authentication.k8s.io/v1beta1"
@@ -39,7 +39,7 @@ provider "kubernetes" {
 provider "helm" {
   kubernetes {
     host                   = module.eks_cluster.cluster_endpoint
-    cluster_ca_certificate = base64encode(module.eks_cluster.certificate)
+    cluster_ca_certificate = base64decode(module.eks_cluster.certificate)
 
     exec {
       api_version = "client.authentication.k8s.io/v1beta1"
